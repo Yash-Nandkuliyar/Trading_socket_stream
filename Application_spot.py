@@ -15,9 +15,9 @@ app = Flask(__name__)
 # Create a logger object for the current module
 logger = logging.getLogger(__name__)
 # Set the logging level for the logger
-logging.basicConfig(filename="Application_Spot_logs/App_Main_perpetual_logs.log", level=logging.INFO, format="%(levelname)s - %(msecs)d - %(message)s")
+logging.basicConfig(filename="App_Main_perpetual_logs.log", level=logging.INFO, format="%(levelname)s - %(msecs)d - %(message)s")
 # Create a TimedRotatingFileHandler object
-file_handler = TimedRotatingFileHandler(filename="Application_Spot_logs/App_Main_perpetual_logs.log", when="midnight", interval=1, backupCount=1000000000)
+file_handler = TimedRotatingFileHandler(filename="App_Main_perpetual_logs.log", when="midnight", interval=1, backupCount=1000000000)
 # Set the logging level for the handler
 file_handler.setLevel(logging.INFO)
 # Set the formatter for the handler
@@ -152,7 +152,7 @@ def on_message(ws, message):
 
         symbol_logger = logging.getLogger(f"Spot_currency_logs.{symbol}")
         symbol_log_handler = TimedRotatingFileHandler(
-            f"currency_logs/Spot_currency_logs/{symbol}/{symbol}_spot_logs.log",
+            f"Spot_currency_logs/{symbol}/{symbol}_spot_logs.log",
             when="midnight",
             interval=1,
             backupCount=10000000000000
@@ -298,7 +298,7 @@ if __name__ == "__main__":
         server_thread.start()
 
         # Load the currency pairs from the configuration file
-        with open("configuration_files/configuration_spot_file.conf", "r") as f:
+        with open("configuration_spot_file.conf", "r") as f:
             currency_pairs = f.read().splitlines()
 
         # Create an empty list to store the websocket threads
